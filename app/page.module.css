@@ -1,0 +1,174 @@
+.container {
+  .main {
+    background: #f0f6ff;
+
+    & > div {
+      width: 100%;
+      height: 953px;
+      margin: 0 auto;
+      padding-top: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+
+      & > h1 {
+        width: 709px;
+        height: auto;
+        font-size: 6.4rem;
+        line-height: 80px;
+        text-align: center;
+        user-select: none;
+
+        & > span {
+          background: linear-gradient(91deg, #6d6afe 17.28%, #ff9f9f 74.98%);
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .mainBr {
+          display: none;
+        }
+      }
+
+      .button {
+        width: 350px;
+        padding: 16px 20px;
+        border-radius: 8px;
+        background: linear-gradient(91deg, #6d6afe 0.12%, #6ae3fe 101.84%);
+
+        color: #f5f5f5;
+        font-size: 1.8rem;
+        font-weight: 600;
+        text-align: center;
+      }
+
+      .image {
+        margin-top: 50px;
+      }
+    }
+  }
+
+  .section {
+    & > div {
+      width: 998px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .textBox > h2 {
+        width: 270px;
+        font-size: 4.8rem;
+        letter-spacing: -0.3px;
+        user-select: none;
+      }
+
+      .textBox > p {
+        width: 270px;
+        color: #6b6b6b;
+        font-size: 1.6rem;
+        line-height: 150%;
+      }
+    }
+  }
+
+  .section1 {
+    & > div {
+      margin-top: 120px;
+
+      .textBox > h2 > span {
+        background: linear-gradient(96deg, #fe8a8a 1.72%, #a4ceff 74.97%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  .section2 {
+    & > div {
+      margin-top: 100px;
+
+      .textBox > h2 > span {
+        background: linear-gradient(277deg, #6fbaff 59.22%, #ffd88b 93.66%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  .section3 {
+    & > div {
+      margin-top: 100px;
+
+      .textBox > h2 > span {
+        background: linear-gradient(99deg, #6d7ccd 19.76%, rgba(82, 136, 133, 0.22) 52.69%);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+
+  .section4 {
+    & > div {
+      margin-top: 100px;
+      margin-bottom: 170px;
+
+      .textBox > h2 > span {
+        background: var(--Fandom-K-gra-blue-to-pink, linear-gradient(271deg, #fe578f -9.84%, #68e8f9 107.18%));
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    .main {
+      & > div {
+        height: 756px;
+        padding-top: 39px;
+
+        & > h1 {
+          .mainBr {
+            display: inherit;
+          }
+        }
+
+        .image {
+          width: 650px;
+          height: 383px;
+          margin-top: 0;
+        }
+      }
+    }
+
+    .section {
+      & > div {
+        width: 698px;
+
+        & > h2 {
+          width: 300px;
+          font-size: 4.8rem;
+          letter-spacing: -0.3px;
+          user-select: none;
+        }
+
+        .sectionImage {
+          width: 385px;
+          height: 315px;
+        }
+      }
+    }
+
+    .section1 {
+      & > div {
+        margin-top: 80px;
+      }
+    }
+  }
+}
+
+@media (max-width: 430px) {
+}
