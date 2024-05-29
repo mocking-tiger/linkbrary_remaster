@@ -1,4 +1,6 @@
 .header {
+  width: 100%;
+  position: fixed;
   background-color: #f0f6ff;
 
   & > div {
@@ -26,6 +28,7 @@
 
 @media (max-width: 430px) {
   .header {
+    width: 100%;
     & > div {
       padding: 13px 32px;
     }

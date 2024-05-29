@@ -1,6 +1,7 @@
 .container {
   .main {
     background: #f0f6ff;
+    padding-top: 94px;
 
     & > div {
       width: 100%;
@@ -174,6 +175,8 @@
 @media (max-width: 430px) {
   .container {
     .main {
+      padding-top: 63px;
+
       & > div {
         height: 399px;
         padding-top: 28px;
