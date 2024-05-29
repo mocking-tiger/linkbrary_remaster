@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.contents}>
         <div className={styles.contentLeft}>
-          <h3>©codeit - 2023</h3>
+          <h3>©링크브러리 리마스터 프로젝트 - 2024</h3>
         </div>
         <div className={styles.contentCenter}>
           <Link href='/privacy-policy'>
