@@ -13,7 +13,7 @@
       gap: 40px;
 
       & > h1 {
-        width: 709px;
+        width: 100%;
         height: auto;
         font-size: 6.4rem;
         line-height: 80px;
@@ -201,10 +201,9 @@
       & > div {
         width: 100%;
         flex-direction: column;
+        padding: 0 33px;
 
         .textBox {
-          width: 100%;
-          padding: 0 33px;
           order: -1;
 
           & > h2 {
@@ -221,6 +220,12 @@
           width: 325px;
           height: 266px;
         }
+      }
+    }
+
+    .section4 {
+      & > div {
+        margin-bottom: 80px;
       }
     }
 

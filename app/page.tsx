@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import Header from '../components/header';
-import styles from './page.module.css';
 import Image from 'next/image';
+import styles from './page.module.css';
+import Header from '../components/header';
+import Footer from '../components/footer';
 
 export default function Main() {
   return (
@@ -93,6 +94,8 @@ export default function Main() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
