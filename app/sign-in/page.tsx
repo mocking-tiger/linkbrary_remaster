@@ -1,10 +1,17 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
 
 export default function SignIn() {
+  const [isVisivle, setIsVisivle] = useState(false);
+
+  const handleIsVisible = () => {
+    setIsVisivle((current) => !current);
+  };
+
   const WIP = () => {
     alert('개발중입니다.');
   };
@@ -24,7 +31,14 @@ export default function SignIn() {
           <h2>이메일</h2>
           <input type='text' />
           <h2>비밀번호</h2>
-          <input type='password' />
+          <input type={isVisivle ? 'text' : 'password'} />
+          <Image
+            src={isVisivle ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
+            width={16}
+            height={16}
+            alt='비밀번호 노출 아이콘'
+            onClick={handleIsVisible}
+          />
         </div>
         <div className={style.buttonBox}>
           <div className={style.loginButton} onClick={WIP}>
