@@ -1,5 +1,17 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
+:root {
+  --primary: #6d6afe;
+  --red: #ff5b56;
+  --black: #111322;
+  --white: #ffffff;
+  --gray10: #3e3e43;
+  --gray20: #9fa6b2;
+  --gray30: #ccd5e3;
+  --gray40: #e7effb;
+  --gray50: #f0f6ff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

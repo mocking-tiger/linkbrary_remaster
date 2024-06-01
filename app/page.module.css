@@ -1,6 +1,6 @@
 .container {
   .main {
-    background: #f0f6ff;
+    background: var(--gray50);
     padding-top: 94px;
 
     & > div {
@@ -117,7 +117,7 @@
       margin-bottom: 170px;
 
       .textBox > h2 > span {
-        background: var(--Fandom-K-gra-blue-to-pink, linear-gradient(271deg, #fe578f -9.84%, #68e8f9 107.18%));
+        background: linear-gradient(271deg, #fe578f -9.84%, #68e8f9 107.18%);
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
