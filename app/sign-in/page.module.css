@@ -33,40 +33,59 @@
     }
 
     .inputBox {
-      position: relative;
       margin-bottom: 30px;
 
-      & > h2 {
+      & h2 {
         color: var(--black);
         font-size: 1.4rem;
         font-weight: 400;
         margin-bottom: 12px;
       }
 
-      & > input {
+      & input {
         width: 100%;
         padding: 18px 15px;
         border-radius: 8px;
         border: 1px solid var(--gray30);
       }
 
-      & > input:focus {
+      & input:focus {
         outline: none;
         border: 1px solid var(--primary);
       }
 
-      & > input:nth-of-type(1) {
+      & > label:nth-of-type(1) > input {
         margin-bottom: 24px;
       }
 
-      & > img {
-        position: absolute;
-        right: 15px;
-        cursor: pointer;
+      & > label > input.invalidate {
+        border: 1px solid var(--red);
+        margin-bottom: 6px;
       }
 
-      & > img:nth-of-type(1) {
-        top: 150px;
+      & > label:nth-of-type(2) {
+        position: relative;
+
+        & > img {
+          position: absolute;
+          bottom: 0;
+          right: 20px;
+          cursor: pointer;
+        }
+      }
+
+      & > h6 {
+        color: var(--red);
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
+
+      & > h6:nth-of-type(1) {
+        margin-bottom: 24px;
+      }
+
+      & > h6:nth-of-type(1).disabled {
+        display: none;
       }
     }
 
