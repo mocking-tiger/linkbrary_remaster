@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
-import Header from '../components/header';
-import Footer from '../components/footer';
+import Header from '../../components/header';
+import Footer from '../../components/footer';
 
 export default function Main() {
   return (
