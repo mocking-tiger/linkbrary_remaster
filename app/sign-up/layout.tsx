@@ -3,9 +3,5 @@ export const metadata = {
 };
 
 export default function SignUpLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang='ko'>
-      <body>{children}</body>
-    </html>
-  );
+  return <div>{children}</div>;
 }

@@ -1,14 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './page.module.css';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
 
 export default function Main() {
   return (
     <div className={styles.container}>
-      <Header />
-
       <main className={styles.main}>
         <div>
           <h1>
@@ -94,8 +90,6 @@ export default function Main() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }
