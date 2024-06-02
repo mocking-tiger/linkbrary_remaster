@@ -6,13 +6,14 @@ export const metadata = {
     default: 'Linkbrary',
   },
   description: '세상의 모든 정보를 쉽게 저장하고 관리해 보세요.',
-  keyword: ['link', 'linkbrary', '즐겨찾기', '바로가기', '링크', '링크브러리', '공유', '편리', '정보'],
-  ogImage: '/images/meta-thumbnail.png',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
+      <head>
+        <meta property='og:image' content='/images/meta-thumbnail.png' />
+      </head>
       <body>{children}</body>
     </html>
   );
