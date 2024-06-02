@@ -7,8 +7,8 @@ import Link from 'next/link';
 
 export default function SignIn() {
   const [isVisivle, setIsVisivle] = useState(false);
-  const [isInvalidateEmail, setIsInvalidateEmail] = useState(false);
-  const [isInvalidatePassword, setIsInvalidatePassword] = useState(false);
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
 
   const handleIsVisible = () => {
@@ -20,16 +20,22 @@ export default function SignIn() {
     const value = e.target.value;
     if (e.target.name === 'email') {
       if (value === '') {
-        setIsInvalidateEmail((current) => !current);
-        setTypeOfEmailError('이메일을 입력해주세요');
+        setIsInvalidEmail((current) => !current);
+        setTypeOfEmailError('이메일을 입력해주세요.');
       } else if (!emailRegex.test(value)) {
-        setIsInvalidateEmail((current) => !current);
+        setIsInvalidEmail((current) => !current);
         setTypeOfEmailError('올바른 이메일 주소가 아닙니다.');
       }
     } else if (e.target.name === 'password') {
       if (value === '') {
-        setIsInvalidatePassword((current) => !current);
+        setIsInvalidPassword((current) => !current);
       }
+    }
+  };
+
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      WIP();
     }
   };
 
@@ -38,7 +44,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className={style.container}>
+    <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>
       <div className={style.contents}>
         <div className={style.logoBox}>
           <Link href='/'>
@@ -56,11 +62,11 @@ export default function SignIn() {
               type='text'
               name='email'
               onBlur={(e) => handleInputWarning(e)}
-              onFocus={() => setIsInvalidateEmail(false)}
-              className={isInvalidateEmail ? style.invalidate : ''}
+              onFocus={() => setIsInvalidEmail(false)}
+              className={isInvalidEmail ? style.invalidate : ''}
             />
           </label>
-          <h6 className={isInvalidateEmail ? '' : style.disabled}>{isInvalidateEmail && typeOfEmailError}</h6>
+          <h6 className={isInvalidEmail ? '' : style.disabled}>{isInvalidEmail && typeOfEmailError}</h6>
           <label htmlFor='password'>
             <h2>비밀번호</h2>
             <input
@@ -68,8 +74,8 @@ export default function SignIn() {
               type={isVisivle ? 'text' : 'password'}
               name='password'
               onBlur={(e) => handleInputWarning(e)}
-              onFocus={() => setIsInvalidatePassword(false)}
-              className={isInvalidatePassword ? style.invalidate : ''}
+              onFocus={() => setIsInvalidPassword(false)}
+              className={isInvalidPassword ? style.invalidate : ''}
             />
             <Image
               src={isVisivle ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
@@ -79,7 +85,7 @@ export default function SignIn() {
               onClick={handleIsVisible}
             />
           </label>
-          <h6>{isInvalidatePassword ? '비밀번호를 입력해주세요' : ''}</h6>
+          <h6>{isInvalidPassword ? '비밀번호를 입력해주세요.' : ''}</h6>
         </div>
         <div className={style.buttonBox}>
           <div className={style.loginButton} onClick={WIP}>

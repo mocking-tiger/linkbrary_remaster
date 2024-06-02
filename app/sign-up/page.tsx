@@ -7,9 +7,50 @@ import Link from 'next/link';
 
 export default function SignUp() {
   const [isVisivle, setIsVisivle] = useState([false, false]);
+  const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+  const [isInvalidPasswordRepeat, setIsInvalidPasswordRepeat] = useState(false);
+  const [typeOfEmailError, setTypeOfEmailError] = useState('');
+  const [typeOfPasswordError, setTypeOfPasswordError] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleIsVisible = (index: number) => {
     setIsVisivle((current) => current.map((visibility, idx) => (idx === index ? !visibility : visibility)));
+  };
+
+  const handleInputWarning = (e: React.FocusEvent<HTMLInputElement>) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const value = e.target.value;
+
+    if (e.target.name === 'email') {
+      if (value === '') {
+        setIsInvalidEmail((current) => !current);
+        setTypeOfEmailError('이메일을 입력해주세요.');
+      } else if (!emailRegex.test(value)) {
+        setIsInvalidEmail((current) => !current);
+        setTypeOfEmailError('올바른 이메일 주소가 아닙니다.');
+      }
+    } else if (e.target.name === 'password') {
+      setPassword(value);
+      if (value === '') {
+        setIsInvalidPassword((current) => !current);
+        setTypeOfPasswordError('비밀번호를 입력해주세요.');
+      } else if (!passwordRegex.test(value)) {
+        setIsInvalidPassword((current) => !current);
+        setTypeOfPasswordError('비밀번호는 영문, 숫자 조합 8자 이상 입력해 주세요.');
+      }
+    } else if (e.target.name === 'password-repeat') {
+      if (value !== password) {
+        setIsInvalidPasswordRepeat(true);
+      }
+    }
+  };
+
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      WIP();
+    }
   };
 
   const WIP = () => {
@@ -17,7 +58,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className={style.container}>
+    <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>
       <div className={style.contents}>
         <div className={style.logoBox}>
           <Link href='/'>
@@ -28,26 +69,58 @@ export default function SignUp() {
           </span>
         </div>
         <div className={style.inputBox}>
-          <h2>이메일</h2>
-          <input type='text' />
-          <h2>비밀번호</h2>
-          <input type={isVisivle[0] ? 'text' : 'password'} />
-          <Image
-            src={isVisivle[0] ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
-            width={16}
-            height={16}
-            alt='비밀번호 노출 아이콘'
-            onClick={() => handleIsVisible(0)}
-          />
-          <h2>비밀번호 확인</h2>
-          <input type={isVisivle[1] ? 'text' : 'password'} />
-          <Image
-            src={isVisivle[1] ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
-            width={16}
-            height={16}
-            alt='비밀번호 노출 아이콘'
-            onClick={() => handleIsVisible(1)}
-          />
+          <label htmlFor='email'>
+            <h2>이메일</h2>
+            <input
+              id='email'
+              type='text'
+              name='email'
+              onBlur={(e) => handleInputWarning(e)}
+              onFocus={() => setIsInvalidEmail(false)}
+              className={isInvalidEmail ? style.invalidate : ''}
+            />
+          </label>
+          <h6 className={isInvalidEmail ? '' : style.disabled}>{isInvalidEmail && typeOfEmailError}</h6>
+          <label htmlFor='password'>
+            <h2>비밀번호</h2>
+            <input
+              id='password'
+              type={isVisivle[0] ? 'text' : 'password'}
+              name='password'
+              onBlur={(e) => handleInputWarning(e)}
+              onFocus={() => setIsInvalidPassword(false)}
+              className={isInvalidPassword ? style.invalidate : ''}
+            />
+            <Image
+              src={isVisivle[0] ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
+              width={16}
+              height={16}
+              alt='비밀번호 노출 아이콘'
+              onClick={() => handleIsVisible(0)}
+            />
+          </label>
+          <h6 className={isInvalidPassword ? '' : style.disabled}>{isInvalidPassword && typeOfPasswordError}</h6>
+          <label htmlFor='password-repeat'>
+            <h2>비밀번호 확인</h2>
+            <input
+              id='password-repeat'
+              type={isVisivle[1] ? 'text' : 'password'}
+              name='password-repeat'
+              onBlur={(e) => handleInputWarning(e)}
+              onFocus={() => setIsInvalidPasswordRepeat(false)}
+              className={isInvalidPasswordRepeat ? style.invalidate : ''}
+            />
+            <Image
+              src={isVisivle[1] ? '/icons/eye-on.svg' : '/icons/eye-off.svg'}
+              width={16}
+              height={16}
+              alt='비밀번호 노출 아이콘'
+              onClick={() => handleIsVisible(1)}
+            />
+          </label>
+          <h6 className={isInvalidPasswordRepeat ? '' : style.disabled}>
+            {isInvalidPasswordRepeat ? '비밀번호가 일치하지 않아요.' : ''}
+          </h6>
         </div>
         <div className={style.buttonBox}>
           <div className={style.loginButton} onClick={WIP}>

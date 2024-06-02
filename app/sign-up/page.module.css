@@ -36,41 +36,61 @@
       margin-bottom: 30px;
       position: relative;
 
-      & > h2 {
+      & h2 {
         color: #000;
         font-size: 1.4rem;
         font-weight: 400;
         margin-bottom: 12px;
       }
 
-      & > input {
+      & input {
         width: 100%;
         padding: 18px 15px;
         border-radius: 8px;
         border: 1px solid var(--gray30);
       }
 
-      & > input:focus {
+      & input:focus {
         outline: none;
         border: 1px solid var(--primary);
       }
 
-      & > input:nth-of-type(1),
-      & > input:nth-of-type(2) {
+      & > label:nth-of-type(1) > input,
+      & > label:nth-of-type(2) > input {
         margin-bottom: 24px;
       }
 
-      & > img {
-        position: absolute;
-        right: 15px;
-        cursor: pointer;
+      & > label > input.invalidate {
+        border: 1px solid var(--red);
+        margin-bottom: 6px;
       }
 
-      & > img:nth-of-type(1) {
-        top: 150px;
+      & > label:nth-of-type(2),
+      & > label:nth-of-type(3) {
+        position: relative;
+
+        & > img {
+          position: absolute;
+          right: 15px;
+          bottom: 0;
+          cursor: pointer;
+        }
       }
-      & > img:nth-of-type(2) {
-        top: 255px;
+
+      & > h6 {
+        color: var(--red);
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
+
+      & > h6:nth-of-type(1),
+      & > h6:nth-of-type(2) {
+        margin-bottom: 24px;
+      }
+
+      & > h6:nth-of-type(1).disabled,
+      & > h6:nth-of-type(2).disabled {
+        display: none;
       }
     }
 
