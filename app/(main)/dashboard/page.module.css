@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  height: 100%;
   padding-top: 94px;
 
   .addBox {
@@ -10,6 +9,54 @@
 
     & > div {
       margin: 0 auto;
+    }
+  }
+
+  .dashboard {
+    width: 1060px;
+    margin: 0 auto;
+    padding-top: 40px;
+    user-select: none;
+
+    .searchBar {
+      width: 100%;
+      margin-bottom: 40px;
+      padding: 15px 16px;
+      padding-left: 42px;
+      border: 0;
+      border-radius: 10px;
+      background-color: #f5f5f5;
+      background-image: url('/icons/search.svg');
+      background-repeat: no-repeat;
+      background-position: 16px 45%;
+    }
+
+    .searchBar:focus {
+      outline: none;
+    }
+
+    .empty {
+      width: 100%;
+      margin-bottom: 100px;
+      padding: 41px 0 35px;
+      text-align: center;
+
+      color: var(--black);
+      text-align: center;
+      font-size: 1.6rem;
+    }
+
+    .folderBox {
+      .folder {
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 5px;
+        border: 1px solid var(--primary);
+        background: var(--white);
+        color: var(--black);
+        font-size: 1.6rem;
+        cursor: pointer;
+      }
     }
   }
 }

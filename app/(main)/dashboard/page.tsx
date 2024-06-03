@@ -7,7 +7,13 @@ export default function Dashboard() {
       <div className={styles.addBox}>
         <AddBar />
       </div>
-      <main className={styles.dashboard}>gd</main>
+      <main className={styles.dashboard}>
+        <input type='text' placeholder='링크를 검색해 보세요' className={styles.searchBar} />
+        <div className={styles.empty}>저장된 링크가 없습니다</div>
+        {/* <div className={styles.folderBox}>
+          <div className={styles.folder}>전체</div>
+        </div> */}
+      </main>
     </div>
   );
 }
