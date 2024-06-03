@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { login } from '../../api/authApi';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
@@ -10,6 +12,9 @@ export default function SignIn() {
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleIsVisible = () => {
     setIsVisivle((current) => !current);
@@ -39,6 +44,11 @@ export default function SignIn() {
     }
   };
 
+  const handleLogin = async () => {
+    const response = await login(email, password);
+    if (response) router.push('/dashboard');
+  };
+
   const WIP = () => {
     alert('개발중입니다.');
   };
@@ -63,6 +73,7 @@ export default function SignIn() {
               name='email'
               onBlur={(e) => handleInputWarning(e)}
               onFocus={() => setIsInvalidEmail(false)}
+              onChange={(e) => setEmail(e.target.value)}
               className={isInvalidEmail ? style.invalidate : ''}
             />
           </label>
@@ -75,6 +86,7 @@ export default function SignIn() {
               name='password'
               onBlur={(e) => handleInputWarning(e)}
               onFocus={() => setIsInvalidPassword(false)}
+              onChange={(e) => setPassword(e.target.value)}
               className={isInvalidPassword ? style.invalidate : ''}
             />
             <Image
@@ -88,7 +100,7 @@ export default function SignIn() {
           <h6>{isInvalidPassword ? '비밀번호를 입력해주세요.' : ''}</h6>
         </div>
         <div className={style.buttonBox}>
-          <div className={style.loginButton} onClick={WIP}>
+          <div className={style.loginButton} onClick={handleLogin}>
             로그인
           </div>
           <div className={style.socialLoginBox}>
