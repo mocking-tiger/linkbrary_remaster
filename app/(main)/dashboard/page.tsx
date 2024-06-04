@@ -1,18 +1,26 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
+import LoadingScreen from '../../../components/loading-screen';
 
 export default function Dashboard() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
       router.push('/');
+    } else {
+      setIsLoading(false);
     }
   }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className={styles.container}>

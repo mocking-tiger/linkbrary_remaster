@@ -6,15 +6,17 @@ import { signIn } from '../../api/authApi';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
+import LoadingScreen from '../../components/loading-screen';
 
 export default function SignIn() {
+  const router = useRouter();
   const [isVisivle, setIsVisivle] = useState(false);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleIsVisible = () => {
     setIsVisivle((current) => !current);
@@ -45,8 +47,10 @@ export default function SignIn() {
   };
 
   const handleSignIn = async () => {
+    setIsLoading(true);
     const response = await signIn(email, password);
     if (response) router.push('/dashboard');
+    setIsLoading(false);
   };
 
   const WIP = () => {
@@ -55,6 +59,7 @@ export default function SignIn() {
 
   return (
     <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>
+      {isLoading && <LoadingScreen />}
       <div className={style.contents}>
         <div className={style.logoBox}>
           <Link href='/'>
