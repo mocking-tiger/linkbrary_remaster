@@ -4,11 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from '../../api/authApi';
 import { useUserStore } from '../../zustand/userStore';
+import { getUser } from '../../api/userApi';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
 import LoadingScreen from '../../components/loading-screen';
-import { getUser } from '../../api/userApi';
 
 export default function SignIn() {
   const router = useRouter();

@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { signUp } from '../../api/authApi';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
-import { signUp } from '../../api/authApi';
-import { useRouter } from 'next/navigation';
 import LoadingScreen from '../../components/loading-screen';
 
 export default function SignUp() {
