@@ -3,13 +3,16 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from '../../api/authApi';
+import { useUserStore } from '../../zustand/userStore';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
 import LoadingScreen from '../../components/loading-screen';
+import { getUser } from '../../api/userApi';
 
 export default function SignIn() {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUserInfo);
   const [isVisivle, setIsVisivle] = useState(false);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
@@ -49,7 +52,11 @@ export default function SignIn() {
   const handleSignIn = async () => {
     setIsLoading(true);
     const response = await signIn(email, password);
-    if (response) router.push('/dashboard');
+    if (response) {
+      const userInfo = await getUser();
+      setUser(userInfo);
+      router.push('/dashboard');
+    }
     setIsLoading(false);
   };
 

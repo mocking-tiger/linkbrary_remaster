@@ -1,6 +1,6 @@
 import { BASE_URL } from './constants/url';
-import instance from './instance/default-instance';
 import { ErrorType } from './types/apiTypes';
+import instance from './instance/default-instance';
 
 export const signIn = async (email: string, password: string) => {
   try {
@@ -11,6 +11,7 @@ export const signIn = async (email: string, password: string) => {
     if (response.status === 200) {
       localStorage.setItem('accessToken', response.data.data.accessToken);
       localStorage.setItem('refreshToken', response.data.data.refreshToken);
+
       return response;
     }
   } catch (e) {
