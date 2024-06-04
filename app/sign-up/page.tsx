@@ -13,6 +13,7 @@ export default function SignUp() {
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
   const [typeOfPasswordError, setTypeOfPasswordError] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
 
   const handleIsVisible = (index: number) => {
     setIsVisivle((current) => current.map((visibility, idx) => (idx === index ? !visibility : visibility)));
@@ -32,7 +33,6 @@ export default function SignUp() {
         setTypeOfEmailError('올바른 이메일 주소가 아닙니다.');
       }
     } else if (e.target.name === 'password') {
-      setPassword(value);
       if (value === '') {
         setIsInvalidPassword((current) => !current);
         setTypeOfPasswordError('비밀번호를 입력해주세요.');
@@ -44,6 +44,11 @@ export default function SignUp() {
       if (value !== password) {
         setIsInvalidPasswordRepeat(true);
       }
+    }
+    if (password === passwordRepeat) {
+      setIsInvalidPasswordRepeat(false);
+    } else {
+      setIsInvalidPasswordRepeat(true);
     }
   };
 
@@ -89,6 +94,7 @@ export default function SignUp() {
               name='password'
               onBlur={(e) => handleInputWarning(e)}
               onFocus={() => setIsInvalidPassword(false)}
+              onChange={(e) => setPassword(e.target.value)}
               className={isInvalidPassword ? style.invalidate : ''}
             />
             <Image
@@ -108,6 +114,7 @@ export default function SignUp() {
               name='password-repeat'
               onBlur={(e) => handleInputWarning(e)}
               onFocus={() => setIsInvalidPasswordRepeat(false)}
+              onChange={(e) => setPasswordRepeat(e.target.value)}
               className={isInvalidPasswordRepeat ? style.invalidate : ''}
             />
             <Image
