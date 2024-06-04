@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '../../api/authApi';
+import { signIn } from '../../api/authApi';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
@@ -44,8 +44,8 @@ export default function SignIn() {
     }
   };
 
-  const handleLogin = async () => {
-    const response = await login(email, password);
+  const handleSignIn = async () => {
+    const response = await signIn(email, password);
     if (response) router.push('/dashboard');
   };
 
@@ -100,7 +100,7 @@ export default function SignIn() {
           <h6>{isInvalidPassword ? '비밀번호를 입력해주세요.' : ''}</h6>
         </div>
         <div className={style.buttonBox}>
-          <div className={style.loginButton} onClick={handleLogin}>
+          <div className={style.loginButton} onClick={handleSignIn}>
             로그인
           </div>
           <div className={style.socialLoginBox}>

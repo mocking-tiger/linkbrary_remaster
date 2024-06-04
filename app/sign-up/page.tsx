@@ -4,16 +4,22 @@ import { useState } from 'react';
 import Image from 'next/image';
 import style from './page.module.css';
 import Link from 'next/link';
+import { signUp } from '../../api/authApi';
+import { useRouter } from 'next/navigation';
+import LoadingScreen from '../../components/loading-screen';
 
 export default function SignUp() {
+  const router = useRouter();
   const [isVisivle, setIsVisivle] = useState([false, false]);
   const [isInvalidEmail, setIsInvalidEmail] = useState(false);
   const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [isInvalidPasswordRepeat, setIsInvalidPasswordRepeat] = useState(false);
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
   const [typeOfPasswordError, setTypeOfPasswordError] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleIsVisible = (index: number) => {
     setIsVisivle((current) => current.map((visibility, idx) => (idx === index ? !visibility : visibility)));
@@ -58,12 +64,23 @@ export default function SignUp() {
     }
   };
 
+  const handleSignUp = async () => {
+    setIsLoading(true);
+    const response = await signUp(email, password);
+    if (response) {
+      alert('회원가입이 완료되었습니다.');
+      router.push('/');
+    }
+    setIsLoading(false);
+  };
+
   const WIP = () => {
     alert('개발중입니다.');
   };
 
   return (
     <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>
+      {isLoading && <LoadingScreen />}
       <div className={style.contents}>
         <div className={style.logoBox}>
           <Link href='/'>
@@ -82,6 +99,7 @@ export default function SignUp() {
               name='email'
               onBlur={(e) => handleInputWarning(e)}
               onFocus={() => setIsInvalidEmail(false)}
+              onChange={(e) => setEmail(e.target.value)}
               className={isInvalidEmail ? style.invalidate : ''}
             />
           </label>
@@ -130,9 +148,15 @@ export default function SignUp() {
           </h6>
         </div>
         <div className={style.buttonBox}>
-          <div className={style.loginButton} onClick={WIP}>
+          <button
+            className={style.loginButton}
+            onClick={handleSignUp}
+            disabled={
+              email === '' || password === '' || passwordRepeat === '' || password !== passwordRepeat ? true : false
+            }
+          >
             회원가입
-          </div>
+          </button>
           <div className={style.socialLoginBox}>
             <h2>다른 방식으로 가입하기</h2>
             <div>
