@@ -1,7 +1,16 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 
 export default function Dashboard() {
+  const router = useRouter();
+
+  if (!localStorage.getItem('accessToken')) {
+    router.push('/');
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.addBox}>
