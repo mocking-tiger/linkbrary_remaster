@@ -13,10 +13,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 
     & > img {
       border-radius: 15px 15px 0 0;
       object-fit: fill;
+    }
+
+    & > img:hover {
+      width: 120%;
+      height: 120%;
       overflow: hidden;
     }
 
