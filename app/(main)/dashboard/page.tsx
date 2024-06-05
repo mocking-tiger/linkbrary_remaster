@@ -1,7 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
+import { getFolders } from '../../../api/folderApi';
+import { FolderType } from '../../../types/common-types';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
@@ -9,6 +11,22 @@ import LoadingScreen from '../../../components/loading-screen';
 export default function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [folders, setFolders] = useState<FolderType[] | undefined>();
+  const [title, setTitle] = useState('전체');
+
+  const handleFoldersInfo = async () => {
+    setIsLoading(true);
+    const response = await getFolders();
+    setFolders(response);
+    setIsLoading(false);
+  };
+
+  const handleSelectedFolder = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+    const target = e.target as HTMLDivElement;
+    if (target && target.innerText) {
+      setTitle(target.innerText);
+    }
+  };
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
@@ -16,6 +34,10 @@ export default function Dashboard() {
     } else {
       setIsLoading(false);
     }
+  }, []);
+
+  useEffect(() => {
+    handleFoldersInfo();
   }, []);
 
   if (isLoading) {
@@ -29,10 +51,22 @@ export default function Dashboard() {
       </div>
       <main className={styles.dashboard}>
         <input type='text' placeholder='링크를 검색해 보세요' className={styles.searchBar} />
+        <div className={styles.folderBox}>
+          <div className={styles.folder} onClick={(e) => handleSelectedFolder(e)}>
+            전체
+          </div>
+          {folders &&
+            folders
+              .slice()
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((folder) => (
+                <div className={styles.folder} onClick={(e) => handleSelectedFolder(e)}>
+                  {folder.name}
+                </div>
+              ))}
+        </div>
+        <h2 className={styles.folderTitle}>{title}</h2>
         <div className={styles.empty}>저장된 링크가 없습니다</div>
-        {/* <div className={styles.folderBox}>
-          <div className={styles.folder}>전체</div>
-        </div> */}
       </main>
     </div>
   );

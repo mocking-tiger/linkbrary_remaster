@@ -7,7 +7,6 @@ import Image from 'next/image';
 
 export default function Header() {
   const user = useUserStore((state) => state.userInfo);
-  console.log(user);
 
   return (
     <header className={styles.header}>
