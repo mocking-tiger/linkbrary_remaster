@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import { MouseEvent, useEffect, useState } from 'react';
 import { getFolders } from '../../../api/folderApi';
 import { FolderType } from '../../../types/common-types';
+import { LinkType } from '../../../components/types/types';
+import { getLinks } from '../../../api/linkApi';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
 import Image from 'next/image';
 import Card from '../../../components/card';
-import { LinkType } from '../../../components/types/types';
-import { getLinks } from '../../../api/linkApi';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -18,6 +18,7 @@ export default function Dashboard() {
   const [folders, setFolders] = useState<FolderType[] | undefined>();
   const [links, setLinks] = useState<LinkType[] | []>([]);
   const [title, setTitle] = useState('전체');
+  const [selectedFolderId, setSelectedFolderId] = useState<number | undefined>(undefined);
 
   const handleFoldersInfo = async () => {
     setIsLoading(true);
@@ -30,10 +31,12 @@ export default function Dashboard() {
     setIsLoading(false);
   };
 
-  const handleSelectedFolder = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>) => {
+  const handleSelectedFolder = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, folderId?: number) => {
     const target = e.target as HTMLDivElement;
     if (target && target.innerText) {
       setTitle(target.innerText);
+      setSelectedFolderId(folderId);
+      console.log(selectedFolderId);
     }
   };
 
@@ -80,7 +83,7 @@ export default function Dashboard() {
               .map((folder) => (
                 <div
                   className={`${styles.folder} ${title === folder.name ? styles.selected : ''}`}
-                  onClick={(e) => handleSelectedFolder(e)}
+                  onClick={(e) => handleSelectedFolder(e, folder.id)}
                   key={folder.id}
                 >
                   {folder.name}
@@ -109,9 +112,10 @@ export default function Dashboard() {
           )}
         </div>
         <div className={styles.cardBox}>
-          {links ? (
-            links.map((link) => <Card link={link} key={link.id} />)
-          ) : (
+          {links && title === '전체'
+            ? links.map((link) => <Card link={link} key={link.id} />)
+            : links.map((link) => link.folder_id === selectedFolderId && <Card link={link} key={link.id} />)}
+          {links.find((link) => link.folder_id === selectedFolderId) === undefined && (
             <div className={styles.empty}>저장된 링크가 없습니다</div>
           )}
         </div>
