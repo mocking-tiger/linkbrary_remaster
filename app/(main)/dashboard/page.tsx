@@ -19,6 +19,7 @@ export default function Dashboard() {
   const [links, setLinks] = useState<LinkType[] | []>([]);
   const [title, setTitle] = useState('전체');
   const [selectedFolderId, setSelectedFolderId] = useState<number | undefined>(undefined);
+  const [filteredData, setFilteredData] = useState<LinkType[]>();
 
   const handleFoldersInfo = async () => {
     setIsLoading(true);
@@ -26,6 +27,7 @@ export default function Dashboard() {
     setFolders(folderResponse);
     const linkResponse = await getLinks();
     setLinks(linkResponse);
+    setFilteredData(linkResponse);
     console.log(folderResponse);
     console.log(linkResponse);
     setIsLoading(false);
@@ -36,7 +38,22 @@ export default function Dashboard() {
     if (target && target.innerText) {
       setTitle(target.innerText);
       setSelectedFolderId(folderId);
-      console.log(selectedFolderId);
+    }
+  };
+
+  const handleFilteredData = (word: string) => {
+    const lowerCaseWord = word.toLowerCase();
+    const filteredLinks = links.filter((link) => {
+      return (
+        link.description?.toLowerCase().includes(lowerCaseWord) ||
+        link.title.toLowerCase().includes(lowerCaseWord) ||
+        link.url.toLowerCase().includes(lowerCaseWord)
+      );
+    });
+    if (word !== '') {
+      setFilteredData(filteredLinks);
+    } else {
+      setFilteredData(links);
     }
   };
 
@@ -62,7 +79,14 @@ export default function Dashboard() {
         <AddBar />
       </div>
       <main className={styles.dashboard}>
-        <input type='text' placeholder='링크를 검색해 보세요' className={styles.searchBar} />
+        <input
+          type='text'
+          placeholder='링크를 검색해 보세요'
+          className={styles.searchBar}
+          onChange={(e) => {
+            handleFilteredData(e.target.value);
+          }}
+        />
         <div className={styles.folderBox}>
           <div
             className={`${styles.folder} ${title === '전체' ? styles.selected : ''}`}
@@ -106,10 +130,11 @@ export default function Dashboard() {
           )}
         </div>
         <div className={styles.cardBox}>
-          {links && title === '전체'
-            ? links.map((link) => <Card link={link} key={link.id} />)
-            : links.map((link) => link.folder_id === selectedFolderId && <Card link={link} key={link.id} />)}
-          {links.find((link) => link.folder_id === selectedFolderId) === undefined && (
+          {filteredData && title === '전체'
+            ? filteredData.map((link) => <Card link={link} key={link.id} />)
+            : filteredData &&
+              filteredData.map((link) => link.folder_id === selectedFolderId && <Card link={link} key={link.id} />)}
+          {filteredData && filteredData.find((link) => link.folder_id === selectedFolderId) === undefined && (
             <div className={styles.empty}>저장된 링크가 없습니다</div>
           )}
         </div>
