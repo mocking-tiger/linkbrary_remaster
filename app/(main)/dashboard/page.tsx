@@ -70,12 +70,6 @@ export default function Dashboard() {
           >
             전체
           </div>
-          <div
-            className={`${styles.folder} ${title === '⭐️ 즐겨찾기' ? styles.selected : ''}`}
-            onClick={(e) => handleSelectedFolder(e)}
-          >
-            ⭐️ 즐겨찾기
-          </div>
           {folders &&
             folders
               .slice()
