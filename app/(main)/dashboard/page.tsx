@@ -66,9 +66,6 @@ export default function Dashboard() {
     } else {
       setIsLoading(false);
     }
-  }, []);
-
-  useEffect(() => {
     handleFoldersInfo();
   }, []);
 
