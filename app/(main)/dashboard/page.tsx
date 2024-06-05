@@ -8,18 +8,25 @@ import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
 import Image from 'next/image';
+import Card from '../../../components/card';
+import { LinkType } from '../../../components/types/types';
+import { getLinks } from '../../../api/linkApi';
 
 export default function Dashboard() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [folders, setFolders] = useState<FolderType[] | undefined>();
+  const [links, setLinks] = useState<LinkType[] | []>([]);
   const [title, setTitle] = useState('전체');
 
   const handleFoldersInfo = async () => {
     setIsLoading(true);
-    const response = await getFolders();
-    setFolders(response);
-    console.log(response);
+    const folderResponse = await getFolders();
+    setFolders(folderResponse);
+    const linkResponse = await getLinks();
+    setLinks(linkResponse);
+    console.log(folderResponse);
+    console.log(linkResponse);
     setIsLoading(false);
   };
 
@@ -54,10 +61,16 @@ export default function Dashboard() {
       <main className={styles.dashboard}>
         <input type='text' placeholder='링크를 검색해 보세요' className={styles.searchBar} />
         <div className={styles.folderBox}>
-          <div className={styles.folder} onClick={(e) => handleSelectedFolder(e)}>
+          <div
+            className={`${styles.folder} ${title === '전체' ? styles.selected : ''}`}
+            onClick={(e) => handleSelectedFolder(e)}
+          >
             전체
           </div>
-          <div className={styles.folder} onClick={(e) => handleSelectedFolder(e)}>
+          <div
+            className={`${styles.folder} ${title === '⭐️ 즐겨찾기' ? styles.selected : ''}`}
+            onClick={(e) => handleSelectedFolder(e)}
+          >
             ⭐️ 즐겨찾기
           </div>
           {folders &&
@@ -65,7 +78,11 @@ export default function Dashboard() {
               .slice()
               .sort((a, b) => a.name.localeCompare(b.name))
               .map((folder) => (
-                <div className={styles.folder} onClick={(e) => handleSelectedFolder(e)} key={folder.id}>
+                <div
+                  className={`${styles.folder} ${title === folder.name ? styles.selected : ''}`}
+                  onClick={(e) => handleSelectedFolder(e)}
+                  key={folder.id}
+                >
                   {folder.name}
                 </div>
               ))}
@@ -91,7 +108,13 @@ export default function Dashboard() {
             ''
           )}
         </div>
-        <div className={styles.empty}>저장된 링크가 없습니다</div>
+        <div className={styles.cardBox}>
+          {links ? (
+            links.map((link) => <Card link={link} key={link.id} />)
+          ) : (
+            <div className={styles.empty}>저장된 링크가 없습니다</div>
+          )}
+        </div>
       </main>
     </div>
   );

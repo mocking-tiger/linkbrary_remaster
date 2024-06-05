@@ -51,6 +51,11 @@
         font-size: 1.6rem;
         cursor: pointer;
       }
+
+      .folder.selected {
+        background-color: var(--primary);
+        color: var(--white);
+      }
     }
     .titleBox {
       margin: 24px 0;
@@ -82,15 +87,21 @@
       }
     }
 
-    .empty {
-      width: 100%;
-      margin-bottom: 100px;
-      padding: 41px 0 35px;
-      text-align: center;
+    .cardBox {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
 
-      color: var(--black);
-      text-align: center;
-      font-size: 1.6rem;
+      .empty {
+        width: 100%;
+        margin-bottom: 100px;
+        padding: 41px 0 35px;
+        text-align: center;
+
+        color: var(--black);
+        text-align: center;
+        font-size: 1.6rem;
+      }
     }
   }
 }
