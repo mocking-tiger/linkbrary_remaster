@@ -152,7 +152,7 @@ export default function Dashboard() {
         <ModalEditFolder selectedFolderId={selectedFolderId} closeModal={closeModal} />
       </Modal>
       <Modal name='folder-delete' title='폴더 삭제'>
-        <ModalDeleteFolder />
+        <ModalDeleteFolder selectedFolderId={selectedFolderId} closeModal={closeModal} title={title} />
       </Modal>
     </div>
   );

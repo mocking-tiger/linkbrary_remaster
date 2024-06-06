@@ -19,3 +19,14 @@ export const editFolderName = async (id: number | undefined, title: string) => {
     alert(error.response.data.error.message);
   }
 };
+
+export const deleteFolder = async (id: number) => {
+  try {
+    const response = await instance.delete(`${BASE_URL}folders/${id}`);
+    alert('삭제되었습니다.');
+    console.log(response);
+  } catch (e) {
+    const error = e as ErrorType;
+    alert(error.response.data.error.message);
+  }
+};

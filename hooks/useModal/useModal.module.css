@@ -22,7 +22,6 @@
   .content {
     width: 360px;
     height: auto;
-    min-height: 238px;
     padding: 32px 40px;
     border-radius: 15px;
     background-color: var(--white);
