@@ -1,13 +1,24 @@
+import { useState } from 'react';
 import { LinkType } from '../types/types';
+import { useModal } from '../../hooks/useModal/useModal';
 import Image from 'next/image';
 import styles from './index.module.css';
 import getTimeDifference from '../../utils/time-checker';
+import ModalDeleteLink from '../modal/delete-link';
+import ModalAddLink from '../modal/add-link';
 
 type props = {
   link: LinkType;
 };
 
 export default function Card({ link }: props) {
+  const { Modal, openModal } = useModal();
+  const [isPopOver, setIsPopOver] = useState(false);
+
+  const handlePopOver = () => {
+    setIsPopOver((prev) => !prev);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.imageBox} onClick={() => window.open(link.url)}>
@@ -22,11 +33,23 @@ export default function Card({ link }: props) {
       <div className={styles.textBox}>
         <div>
           <h5>{getTimeDifference(link.created_at)}</h5>
-          <Image src='/icons/kebab.svg' width={21} height={17} alt='케밥아이콘' />
+          <Image src='/icons/kebab.svg' width={21} height={17} alt='케밥아이콘' onClick={handlePopOver} />
+          {isPopOver && (
+            <div className={styles.popOver}>
+              <h5 onClick={() => openModal('delete-link')}>삭제하기</h5>
+              <h5 onClick={() => openModal('add-link')}>폴더에 추가</h5>
+            </div>
+          )}
         </div>
         <p>{link.description ? link.description : link.url}</p>
         <h6>{link.created_at.slice(0, 10)}</h6>
       </div>
+      <Modal name='delete-link' title='링크 삭제'>
+        <ModalDeleteLink />
+      </Modal>
+      <Modal name='add-link' title='폴더에 추가'>
+        <ModalAddLink />
+      </Modal>
     </div>
   );
 }

@@ -13,6 +13,8 @@ import LoadingScreen from '../../../components/loading-screen';
 import Image from 'next/image';
 import Card from '../../../components/card';
 import ModalEditFolder from '../../../components/modal/edit-folder';
+import ModalShareFolder from '../../../components/modal/share-folder';
+import ModalDeleteFolder from '../../../components/modal/delete-folder';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -112,7 +114,7 @@ export default function Dashboard() {
           <h2 className={styles.folderTitle}>{title}</h2>
           {title !== '전체' ? (
             <div className={styles.tools}>
-              <h3>
+              <h3 onClick={() => openModal('folder-share')}>
                 <Image src='/icons/folder-share.svg' width={18} height={18} alt='공유아이콘' />
                 공유
               </h3>
@@ -143,8 +145,14 @@ export default function Dashboard() {
         </div>
       </main>
 
+      <Modal name='folder-share' title='폴더 공유'>
+        <ModalShareFolder />
+      </Modal>
       <Modal name='folder-edit' title='폴더 이름 변경'>
         <ModalEditFolder />
+      </Modal>
+      <Modal name='folder-delete' title='폴더 삭제'>
+        <ModalDeleteFolder />
       </Modal>
     </div>
   );
