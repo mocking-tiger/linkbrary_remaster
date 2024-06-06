@@ -1,0 +1,42 @@
+@keyframes slideIn {
+  from {
+    transform: translateY(-10%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.outside {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  .content {
+    width: 360px;
+    height: auto;
+    min-height: 238px;
+    padding: 32px 40px;
+    border-radius: 15px;
+    background-color: var(--white);
+    animation: slideIn 0.3s ease forwards;
+
+    .close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      cursor: pointer;
+    }
+
+    .title {
+      text-align: center;
+    }
+  }
+}

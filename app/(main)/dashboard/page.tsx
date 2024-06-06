@@ -6,14 +6,17 @@ import { getFolders } from '../../../api/folderApi';
 import { FolderType } from '../../../types/common-types';
 import { LinkType } from '../../../components/types/types';
 import { getLinks } from '../../../api/linkApi';
+import { useModal } from '../../../hooks/useModal/useModal';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
 import Image from 'next/image';
 import Card from '../../../components/card';
+import ModalEditFolder from '../../../components/modal/edit-folder';
 
 export default function Dashboard() {
   const router = useRouter();
+  const { Modal, openModal } = useModal();
   const [isLoading, setIsLoading] = useState(true);
   const [folders, setFolders] = useState<FolderType[] | undefined>();
   const [links, setLinks] = useState<LinkType[] | []>([]);
@@ -116,11 +119,11 @@ export default function Dashboard() {
                 <Image src='/icons/folder-share.svg' width={18} height={18} alt='공유아이콘' />
                 공유
               </h3>
-              <h3>
+              <h3 onClick={() => openModal('folder-edit')}>
                 <Image src='/icons/folder-edit.svg' width={18} height={18} alt='공유아이콘' />
                 이름 변경
               </h3>
-              <h3>
+              <h3 onClick={() => openModal('folder-delete')}>
                 <Image src='/icons/folder-delete.svg' width={18} height={18} alt='공유아이콘' />
                 삭제
               </h3>
@@ -137,6 +140,10 @@ export default function Dashboard() {
           )}
         </div>
       </main>
+
+      <Modal name='folder-edit' title='폴더 이름 변경'>
+        <ModalEditFolder />
+      </Modal>
     </div>
   );
 }
