@@ -19,9 +19,17 @@ export default function Card({ link }: props) {
     setIsPopOver((prev) => !prev);
   };
 
+  const handleImageClick = () => {
+    let url = link.url;
+    if (!/^https?:\/\//i.test(url)) {
+      url = `https://${url}`;
+    }
+    window.open(url, '_blank');
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.imageBox} onClick={() => window.open(link.url)}>
+      <div className={styles.imageBox} onClick={handleImageClick}>
         <Image
           className={link.image_source ? '' : styles.default}
           src={link.image_source ? link.image_source : '/icons/logo.svg'}
