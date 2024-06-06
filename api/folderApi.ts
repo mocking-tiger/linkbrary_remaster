@@ -25,6 +25,21 @@ export const deleteFolder = async (id: number) => {
     const response = await instance.delete(`${BASE_URL}folders/${id}`);
     alert('삭제되었습니다.');
     console.log(response);
+    return response;
+  } catch (e) {
+    const error = e as ErrorType;
+    alert(error.response.data.error.message);
+  }
+};
+
+export const addFolder = async (title: string) => {
+  try {
+    const response = await instance.post(`${BASE_URL}folders`, {
+      name: title,
+    });
+    alert('추가되었습니다.');
+    console.log(response);
+    return response;
   } catch (e) {
     const error = e as ErrorType;
     alert(error.response.data.error.message);

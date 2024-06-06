@@ -25,7 +25,7 @@ const ModalEditFolder = ({
   return (
     <div className={styles.container}>
       {isLoading && <LoadingScreen />}
-      <input type='text' onChange={(e) => setTitle(e.target.value)} />
+      <input type='text' onChange={(e) => setTitle(e.target.value)} placeholder='내용 입력' />
       <ModalButton onClick={handleEditFolderName} type='blue'>
         폴더공유
       </ModalButton>

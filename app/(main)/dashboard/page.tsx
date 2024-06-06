@@ -15,6 +15,7 @@ import Card from '../../../components/card';
 import ModalEditFolder from '../../../components/modal/edit-folder';
 import ModalShareFolder from '../../../components/modal/share-folder';
 import ModalDeleteFolder from '../../../components/modal/delete-folder';
+import ModalAddFolder from '../../../components/modal/add-folder';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -109,6 +110,13 @@ export default function Dashboard() {
                   {folder.name}
                 </div>
               ))}
+          <Image
+            src='/icons/folder-add.svg'
+            width={16}
+            height={16}
+            alt='폴더추가아이콘'
+            onClick={() => openModal('folder-add')}
+          />
         </div>
         <div className={styles.titleBox}>
           <h2 className={styles.folderTitle}>{title}</h2>
@@ -153,6 +161,9 @@ export default function Dashboard() {
       </Modal>
       <Modal name='folder-delete' title='폴더 삭제'>
         <ModalDeleteFolder selectedFolderId={selectedFolderId} closeModal={closeModal} title={title} />
+      </Modal>
+      <Modal name='folder-add' title='폴더 추가'>
+        <ModalAddFolder closeModal={closeModal} />
       </Modal>
     </div>
   );
