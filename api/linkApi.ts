@@ -23,3 +23,22 @@ export const deleteLink = async (id: number) => {
     alert(error.response.data.error.message);
   }
 };
+
+export const addLink = async (id: number | undefined, url: string) => {
+  try {
+    const response = await instance.post(`${BASE_URL}links`, {
+      url: url,
+      folderId: id,
+    });
+    console.log(response);
+    alert('추가되었습니다.');
+    return response;
+  } catch (e) {
+    const error = e as ErrorType;
+    if (error.response.status === 405) {
+      alert('유효하지 않은 URL입니다.');
+    } else {
+      alert(error.response.data.error.message);
+    }
+  }
+};

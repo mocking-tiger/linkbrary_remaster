@@ -7,6 +7,17 @@ export const getFolders = async () => {
   return response.data.data.folder;
 };
 
+export const getFolderDetail = async (id: number) => {
+  try {
+    const response = await instance.get(`${BASE_URL}users/${id}/folders`);
+    console.log(response);
+    return response.data.data;
+  } catch (e) {
+    const error = e as ErrorType;
+    alert(error.response.data.error.message);
+  }
+};
+
 export const editFolderName = async (id: number | undefined, title: string) => {
   try {
     const response = await instance.put(`${BASE_URL}folders/${id}`, {

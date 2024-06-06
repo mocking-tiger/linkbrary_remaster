@@ -1,0 +1,54 @@
+.container {
+  & > h6 {
+    margin: 8px 0 24px;
+    color: var(--gray60);
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  .folderBox {
+    max-height: 700px;
+    overflow-y: auto;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+
+    .folder {
+      width: 100%;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px;
+      position: relative;
+
+      & > h2 {
+        color: #373740;
+        font-size: 1.6rem;
+        font-weight: 400;
+      }
+
+      & > h3 {
+        color: var(--gray60);
+        font-size: 1.4rem;
+        font-weight: 400;
+      }
+
+      & > img {
+        position: absolute;
+        right: 10px;
+      }
+    }
+
+    .folder.selected {
+      background-color: var(--gray40);
+    }
+
+    .folder:hover {
+      background-color: var(--gray40);
+    }
+  }
+}

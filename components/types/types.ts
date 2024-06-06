@@ -17,3 +17,14 @@ export type LinkType = {
   image_source: string | null;
   folder_id: number;
 };
+
+export interface FolderDetailType {
+  id: number;
+  created_at: string;
+  name: string;
+  user_id: number;
+  favorite: boolean;
+  link: {
+    count: number;
+  };
+}

@@ -48,7 +48,7 @@ export default function Card({ link }: props) {
         <ModalDeleteLink id={link.id} url={link.url} closeModal={closeModal} />
       </Modal>
       <Modal name='add-link' title='폴더에 추가'>
-        <ModalAddLink />
+        <ModalAddLink url={link.url} closeModal={closeModal} />
       </Modal>
     </div>
   );
