@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { signUp } from '../../api/authApi';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleIsVisible = (index: number) => {
     setIsVisivle((current) => current.map((visibility, idx) => (idx === index ? !visibility : visibility)));
@@ -77,6 +77,19 @@ export default function SignUp() {
   const WIP = () => {
     alert('개발중입니다.');
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (localStorage.getItem('accessToken')) {
+      router.push('/dashboard');
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>

@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div>
-        <Link href='/'>
+        <Link href={user === null ? '/' : '/dashboard'}>
           <Image src='/icons/logo.svg' width={133} height={24} alt='로고' className={styles.logo} />
         </Link>
         {user ? (

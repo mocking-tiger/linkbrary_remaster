@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from '../../api/authApi';
 import { useUserStore } from '../../zustand/userStore';
@@ -19,7 +19,7 @@ export default function SignIn() {
   const [typeOfEmailError, setTypeOfEmailError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleIsVisible = () => {
     setIsVisivle((current) => !current);
@@ -63,6 +63,19 @@ export default function SignIn() {
   const WIP = () => {
     alert('개발중입니다.');
   };
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (localStorage.getItem('accessToken')) {
+      router.push('/dashboard');
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className={style.container} onKeyDown={(e) => handleEnterKey(e)}>
