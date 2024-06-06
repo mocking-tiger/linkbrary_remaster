@@ -117,6 +117,9 @@ export default function Dashboard() {
             alt='폴더추가아이콘'
             onClick={() => openModal('folder-add')}
           />
+          <div className={styles.floatingActionButton} onClick={() => openModal('folder-add')}>
+            폴더 추가 +
+          </div>
         </div>
         <div className={styles.titleBox}>
           <h2 className={styles.folderTitle}>{title}</h2>

@@ -65,6 +65,10 @@
         right: -100px;
         cursor: pointer;
       }
+
+      .floatingActionButton {
+        display: none;
+      }
     }
 
     .titleBox {
@@ -112,6 +116,86 @@
         color: var(--black);
         text-align: center;
         font-size: 1.6rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    .addBox {
+      height: auto;
+      padding: 60px 32.5px;
+      padding-left: 32.5px;
+    }
+
+    .dashboard {
+      width: 100%;
+      padding: 40px 32.5px;
+
+      .folderBox {
+        & > img {
+          right: -10%;
+        }
+      }
+
+      .cardBox {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+}
+
+@media (max-width: 430px) {
+  .container {
+    padding-top: 74px;
+
+    .addBox {
+      padding: 24px 20px 40px;
+    }
+
+    .dashboard {
+      padding: 20px 20px;
+
+      .searchBar {
+        margin-bottom: 32px;
+      }
+
+      .folderBox {
+        .folder {
+          font-size: 1.4rem;
+        }
+
+        & > img {
+          display: none;
+        }
+
+        .floatingActionButton {
+          padding: 8px 24px;
+          display: inherit;
+          position: fixed;
+          bottom: 30px;
+          left: 35%;
+          color: var(--white);
+          background-color: var(--primary);
+          text-align: center;
+          font-size: 1.6rem;
+          letter-spacing: -0.3px;
+          border-radius: 20px;
+        }
+      }
+
+      .titleBox {
+        flex-direction: column;
+        gap: 12px;
+        .folderTitle {
+          font-size: 2rem;
+        }
+      }
+
+      .cardBox {
+        grid-template-columns: 1fr;
       }
     }
   }
