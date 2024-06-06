@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import styles from './useModal.module.css';
@@ -14,12 +14,6 @@ interface ModalProps {
 
 export const useModal = () => {
   const [modalName, setModalName] = useState('');
-  const [modalRoot, setModalRoot] = useState<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const root = document.getElementById('modal-root') as HTMLElement;
-    setModalRoot(root);
-  }, []);
 
   const openModal = (name: string) => {
     setModalName(name);
@@ -48,10 +42,10 @@ export const useModal = () => {
             </div>
           </div>
         ) : null,
-        modalRoot as HTMLElement,
+        document.body,
       );
     },
-    [modalName, modalRoot],
+    [modalName],
   );
 
   return { Modal, openModal };
