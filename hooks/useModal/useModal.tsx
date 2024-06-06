@@ -48,5 +48,5 @@ export const useModal = () => {
     [modalName],
   );
 
-  return { Modal, openModal };
+  return { Modal, openModal, closeModal };
 };

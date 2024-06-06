@@ -18,7 +18,7 @@ import ModalDeleteFolder from '../../../components/modal/delete-folder';
 
 export default function Dashboard() {
   const router = useRouter();
-  const { Modal, openModal } = useModal();
+  const { Modal, openModal, closeModal } = useModal();
   const [isLoading, setIsLoading] = useState(true);
   const [folders, setFolders] = useState<FolderType[] | undefined>();
   const [links, setLinks] = useState<LinkType[] | []>([]);
@@ -149,7 +149,7 @@ export default function Dashboard() {
         <ModalShareFolder />
       </Modal>
       <Modal name='folder-edit' title='폴더 이름 변경'>
-        <ModalEditFolder />
+        <ModalEditFolder selectedFolderId={selectedFolderId} closeModal={closeModal} />
       </Modal>
       <Modal name='folder-delete' title='폴더 삭제'>
         <ModalDeleteFolder />
