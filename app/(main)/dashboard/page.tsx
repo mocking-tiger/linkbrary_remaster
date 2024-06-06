@@ -22,6 +22,7 @@ export default function Dashboard() {
   const [links, setLinks] = useState<LinkType[] | []>([]);
   const [title, setTitle] = useState('전체');
   const [filteredData, setFilteredData] = useState<LinkType[]>();
+  const [selectedFolderId, setSelectedFolderId] = useState<number | undefined>(undefined);
 
   const handleFoldersInfo = async () => {
     setIsLoading(true);
@@ -39,11 +40,7 @@ export default function Dashboard() {
     const target = e.target as HTMLDivElement;
     if (target && target.innerText) {
       setTitle(target.innerText);
-      if (folderId !== undefined) {
-        setFilteredData(links.filter((link) => link.folder_id === folderId));
-      } else {
-        setFilteredData(links);
-      }
+      setSelectedFolderId(folderId);
     }
   };
 
@@ -133,11 +130,16 @@ export default function Dashboard() {
           )}
         </div>
         <div className={styles.cardBox}>
-          {filteredData && filteredData.length === 0 ? (
-            <div className={styles.empty}>저장된 링크가 없습니다</div>
-          ) : (
-            filteredData && filteredData.map((link) => <Card link={link} key={link.id} />)
-          )}
+          {filteredData && title === '전체'
+            ? filteredData.map((link) => <Card link={link} key={link.id} />)
+            : filteredData &&
+              filteredData.map((link) => link.folder_id === selectedFolderId && <Card link={link} key={link.id} />)}
+          {filteredData &&
+            title !== '전체' &&
+            filteredData.find((link) => link.folder_id === selectedFolderId) === undefined && (
+              <div className={styles.empty}>저장된 링크가 없습니다</div>
+            )}
+          {title === '전체' && filteredData?.length === 0 && <div className={styles.empty}>저장된 링크가 없습니다</div>}
         </div>
       </main>
 
