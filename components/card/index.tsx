@@ -57,12 +57,16 @@ export default function Card({ link, forShare }: props) {
         <p>{link.description ? link.description : link.url}</p>
         <h6>{link.created_at.slice(0, 10)}</h6>
       </div>
-      <Modal name='delete-link' title='링크 삭제'>
-        <ModalDeleteLink id={link.id} url={link.url} closeModal={closeModal} />
-      </Modal>
-      <Modal name='add-link' title='폴더에 추가'>
-        <ModalAddLink url={link.url} closeModal={closeModal} />
-      </Modal>
+      {!forShare && (
+        <div>
+          <Modal name='delete-link' title='링크 삭제'>
+            <ModalDeleteLink id={link.id} url={link.url} closeModal={closeModal} />
+          </Modal>
+          <Modal name='add-link' title='폴더에 추가'>
+            <ModalAddLink url={link.url} closeModal={closeModal} />
+          </Modal>
+        </div>
+      )}
     </div>
   );
 }

@@ -26,59 +26,10 @@
       margin: 0 auto;
     }
   }
-
-  .dashboard {
-    padding-top: 40px;
-    width: 1060px;
-    margin: 0 auto;
-
-    .cardBox {
-      margin-bottom: 100px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-
-      .empty {
-        width: 100%;
-        margin-bottom: 100px;
-        padding: 41px 0 35px;
-        text-align: center;
-
-        color: var(--black);
-        text-align: center;
-        font-size: 1.6rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .container {
-    .dashboard {
-      width: 100%;
-      padding: 40px 32.5px;
-
-      .cardBox {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  }
 }
 
 @media (max-width: 430px) {
   .container {
     padding-top: 74px;
-    .dashboard {
-      padding: 20px 20px;
-
-      .searchBar {
-        margin-bottom: 32px;
-      }
-
-      .cardBox {
-        grid-template-columns: 1fr;
-      }
-    }
   }
 }

@@ -1,11 +1,9 @@
 import { getFolderForShare } from '../../../../api/folderApi';
 import { getLinkForShare } from '../../../../api/linkApi';
 import { getUserForShare } from '../../../../api/userApi';
-import { LinkType } from '../../../../components/types/types';
 import Image from 'next/image';
 import styles from './page.module.css';
-import SearchBar from '../../../../components/search-bar';
-import Card from '../../../../components/card';
+import DashboardForShare from '../../../../components/dashboard-for-share';
 
 interface PropsType {
   params: {
@@ -32,9 +30,9 @@ export default async function Shared(props: PropsType) {
   const folder = await getFolder(props.params.folderID);
   const user = await getUser(folder.user_id);
   const links = await getLinks(folder.id, folder.user_id);
+
   console.log(folder);
   console.log(user);
-  console.log(links);
   return (
     <div className={styles.container}>
       <div className={styles.folderInfo}>
@@ -42,16 +40,7 @@ export default async function Shared(props: PropsType) {
         <p>@{user.name}</p>
         <h1>{folder.name}</h1>
       </div>
-      <main className={styles.dashboard}>
-        <SearchBar />
-        <div className={styles.cardBox}>
-          {links.length === 0 ? (
-            <div className={styles.empty}>저장된 링크가 없습니다</div>
-          ) : (
-            links.map((link: LinkType) => <Card link={link} key={link.id} forShare />)
-          )}
-        </div>
-      </main>
+      <DashboardForShare links={links} />
     </div>
   );
 }
