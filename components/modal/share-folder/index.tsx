@@ -19,15 +19,29 @@ const ModalShareFolder = ({
     closeModal();
   };
 
+  const shareFacebook = () => {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${URL}`,
+      '페이스북 공유하기',
+      'width=400,height=500,location=no,status=no,scrollbars=yes',
+    );
+    closeModal();
+  };
+
   return (
     <div className={styles.container}>
       <h2>{title}</h2>
       <div className={styles.imageBox}>
-        <div onClick={() => shareKakao(URL, title)}>
+        <div
+          onClick={() => {
+            shareKakao(URL, title);
+            closeModal();
+          }}
+        >
           <Image src='/images/kakao.png' width={42} height={42} alt='' />
           <h3>카카오톡</h3>
         </div>
-        <div>
+        <div onClick={shareFacebook}>
           <Image src='/images/facebook.png' width={42} height={42} alt='' />
           <h3>페이스북</h3>
         </div>
