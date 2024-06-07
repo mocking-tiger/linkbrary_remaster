@@ -1,0 +1,30 @@
+.container {
+  & > h2 {
+    margin: 8px 0 24px;
+    color: #9fa6b2;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+  .imageBox {
+    display: flex;
+    justify-content: space-evenly;
+
+    & > div {
+      cursor: pointer;
+
+      & > h3 {
+        margin-top: 10px;
+        color: #373740;
+        font-size: 1.3rem;
+        font-weight: 400;
+      }
+    }
+
+    & > div > div {
+      width: fit-content;
+      background-color: var(--gray50);
+      border-radius: 100%;
+    }
+  }
+}

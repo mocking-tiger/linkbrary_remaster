@@ -157,7 +157,7 @@ export default function Dashboard() {
       </main>
 
       <Modal name='folder-share' title='폴더 공유'>
-        <ModalShareFolder />
+        <ModalShareFolder selectedFolderId={selectedFolderId} closeModal={closeModal} title={title} />
       </Modal>
       <Modal name='folder-edit' title='폴더 이름 변경'>
         <ModalEditFolder selectedFolderId={selectedFolderId} closeModal={closeModal} />
