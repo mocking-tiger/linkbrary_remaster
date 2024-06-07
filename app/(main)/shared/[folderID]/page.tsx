@@ -31,6 +31,7 @@ export default async function Shared(props: PropsType) {
   const user = await getUser(folder.user_id);
   const links = await getLinks(folder.id, folder.user_id);
 
+  const linksForProp = links;
   console.log(folder);
   console.log(user);
   return (
@@ -40,7 +41,7 @@ export default async function Shared(props: PropsType) {
         <p>@{user.name}</p>
         <h1>{folder.name}</h1>
       </div>
-      <DashboardForShare links={links} />
+      <DashboardForShare links={linksForProp} />
     </div>
   );
 }
