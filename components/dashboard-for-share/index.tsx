@@ -1,18 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import styles from './index.module.css';
 import { LinkType } from '../types/types';
+import styles from './index.module.css';
 import Card from '../card';
 
-type SearchType = {
-  links: LinkType[];
-};
-
-const DashboardForShare = ({ links }: SearchType) => {
+const DashboardForShare = ({ links }: { links: LinkType[] }) => {
   const [filteredData, setFilteredData] = useState(links);
 
   const handleFilteredData = (word: string) => {
+    console.log('hi');
     const lowerCaseWord = word.toLowerCase();
     const filteredLinks = links.filter((link) => {
       return (
