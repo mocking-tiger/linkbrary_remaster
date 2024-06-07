@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './index.module.css';
+import { shareKakao } from '../../../utils/share-kakao';
 
 const ModalShareFolder = ({
   selectedFolderId,
@@ -22,7 +23,7 @@ const ModalShareFolder = ({
     <div className={styles.container}>
       <h2>{title}</h2>
       <div className={styles.imageBox}>
-        <div>
+        <div onClick={() => shareKakao(URL, title)}>
           <Image src='/images/kakao.png' width={42} height={42} alt='' />
           <h3>카카오톡</h3>
         </div>

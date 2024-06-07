@@ -29,6 +29,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='ko'>
+      <head>
+        <script src='https://developers.kakao.com/sdk/js/kakao.js'></script>
+      </head>
       <body>{children}</body>
     </html>
   );
