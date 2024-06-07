@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { LinkType } from '../types/types';
 import { useModal } from '../../hooks/useModal/useModal';
@@ -9,9 +11,10 @@ import ModalAddLink from '../modal/add-link';
 
 type props = {
   link: LinkType;
+  forShare?: boolean;
 };
 
-export default function Card({ link }: props) {
+export default function Card({ link, forShare }: props) {
   const { Modal, openModal, closeModal } = useModal();
   const [isPopOver, setIsPopOver] = useState(false);
 
@@ -41,7 +44,9 @@ export default function Card({ link }: props) {
       <div className={styles.textBox}>
         <div>
           <h5>{getTimeDifference(link.created_at)}</h5>
-          <Image src='/icons/kebab.svg' width={21} height={17} alt='케밥아이콘' onClick={handlePopOver} />
+          {!forShare && (
+            <Image src='/icons/kebab.svg' width={21} height={17} alt='케밥아이콘' onClick={handlePopOver} />
+          )}{' '}
           {isPopOver && (
             <div className={styles.popOver}>
               <h5 onClick={() => openModal('delete-link')}>삭제하기</h5>
