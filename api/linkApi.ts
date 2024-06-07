@@ -1,6 +1,7 @@
 import { BASE_URL } from './constants/url';
-import instance from './instance/default-instance';
 import { ErrorType } from './types/apiTypes';
+import axios from 'axios';
+import instance from './instance/default-instance';
 
 export const getLinks = async () => {
   try {
@@ -9,6 +10,15 @@ export const getLinks = async () => {
   } catch (e) {
     const error = e as ErrorType;
     alert(error.response.data.error.message);
+  }
+};
+
+export const getLinkForShare = async (folder: number, user: number) => {
+  try {
+    const resoponse = await axios.get(`${BASE_URL}users/${user}/links?folderId=${folder}`);
+    return resoponse;
+  } catch (e) {
+    console.log(e);
   }
 };
 

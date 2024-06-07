@@ -1,10 +1,20 @@
 import { BASE_URL } from './constants/url';
-import instance from './instance/default-instance';
 import { ErrorType } from './types/apiTypes';
+import axios from 'axios';
+import instance from './instance/default-instance';
 
 export const getFolders = async () => {
   const response = await instance.get(`${BASE_URL}folders`);
   return response.data.data.folder;
+};
+
+export const getFolderForShare = async (id: number) => {
+  try {
+    const resoponse = await axios.get(`${BASE_URL}folders/${id}`);
+    return resoponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const getFolderDetail = async (id: number) => {
