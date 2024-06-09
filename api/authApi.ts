@@ -30,7 +30,6 @@ export const signUp = async (email: string, password: string) => {
       email: email,
       password: password,
     });
-    console.log(response);
     return response;
   } catch (e) {
     const error = e as ErrorType;

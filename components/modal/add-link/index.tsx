@@ -13,13 +13,11 @@ const ModalAddLink = ({ url, closeModal }: { url: string; closeModal: () => void
   const [isLoading, setIsLoading] = useState(false);
   const [folders, setFolders] = useState<FolderDetailType[] | undefined>();
   const [selectedId, setSelectedId] = useState<number>();
-  console.log(user);
 
   const setFolderDetail = async () => {
     setIsLoading(true);
     const response = await getFolderDetail(user.id);
     setFolders(response);
-    console.log(response);
     setIsLoading(false);
   };
 

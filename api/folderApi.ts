@@ -20,7 +20,6 @@ export const getFolderForShare = async (id: number) => {
 export const getFolderDetail = async (id: number) => {
   try {
     const response = await instance.get(`${BASE_URL}users/${id}/folders`);
-    console.log(response);
     return response.data.data;
   } catch (e) {
     const error = e as ErrorType;
@@ -45,7 +44,6 @@ export const deleteFolder = async (id: number) => {
   try {
     const response = await instance.delete(`${BASE_URL}folders/${id}`);
     alert('삭제되었습니다.');
-    console.log(response);
     return response;
   } catch (e) {
     const error = e as ErrorType;
@@ -59,7 +57,6 @@ export const addFolder = async (title: string) => {
       name: title,
     });
     alert('추가되었습니다.');
-    console.log(response);
     return response;
   } catch (e) {
     const error = e as ErrorType;

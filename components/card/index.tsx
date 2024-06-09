@@ -23,7 +23,6 @@ export default function Card({ link, forShare }: props) {
   };
 
   const handleImageClick = () => {
-    console.log('링크클릭!');
     let url = link.url;
     if (!/^https?:\/\//i.test(url)) {
       url = `https://${url}`;

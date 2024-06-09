@@ -25,7 +25,6 @@ export const getLinkForShare = async (folder: number, user: number) => {
 export const deleteLink = async (id: number) => {
   try {
     const response = await instance.delete(`${BASE_URL}links/${id}`);
-    console.log(response);
     alert('삭제되었습니다.');
     return response;
   } catch (e) {
@@ -40,7 +39,6 @@ export const addLink = async (id: number | undefined, url: string) => {
       url: url,
       folderId: id,
     });
-    console.log(response);
     alert('추가되었습니다.');
     return response;
   } catch (e) {

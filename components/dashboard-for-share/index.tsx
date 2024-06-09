@@ -9,7 +9,6 @@ const DashboardForShare = ({ links }: { links: LinkType[] }) => {
   const [filteredData, setFilteredData] = useState(links);
 
   const handleFilteredData = (word: string) => {
-    console.log('hi');
     const lowerCaseWord = word.toLowerCase();
     const filteredLinks = links.filter((link) => {
       return (
