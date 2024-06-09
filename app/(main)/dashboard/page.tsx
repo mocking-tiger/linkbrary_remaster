@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { getFolders } from '../../../api/folderApi';
 import { FolderType } from '../../../types/common-types';
 import { LinkType } from '../../../components/types/types';
@@ -19,7 +19,10 @@ import ModalAddFolder from '../../../components/modal/add-folder';
 
 export default function Dashboard() {
   const router = useRouter();
+  const addBarRef = useRef(null);
   const { Modal, openModal, closeModal } = useModal();
+  const [isAddBarVisible, setIsAddBarVisible] = useState(true);
+  const [isBottom, setIsBottom] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [folders, setFolders] = useState<FolderType[] | undefined>();
   const [links, setLinks] = useState<LinkType[] | []>([]);
@@ -34,8 +37,6 @@ export default function Dashboard() {
     const linkResponse = await getLinks();
     setLinks(linkResponse);
     setFilteredData(linkResponse);
-    console.log(folderResponse);
-    console.log(linkResponse);
     setIsLoading(false);
   };
 
@@ -63,6 +64,12 @@ export default function Dashboard() {
     }
   };
 
+  const checkAddBarVisibility = (addBar: HTMLDivElement) => {
+    const rect = addBar.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    return rect.bottom >= 0 && rect.top <= windowHeight;
+  };
+  //cp
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
       router.push('/');
@@ -70,6 +77,20 @@ export default function Dashboard() {
       setIsLoading(false);
     }
     handleFoldersInfo();
+    const handleScroll = () => {
+      const addBar = addBarRef.current;
+      if (addBar) {
+        const isVisible = checkAddBarVisibility(addBar);
+        setIsAddBarVisible(isVisible);
+      }
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setIsBottom(true);
+      } else {
+        setIsBottom(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (isLoading) {
@@ -78,7 +99,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.addBox}>
+      <div className={styles.addBox} ref={addBarRef}>
         <AddBar />
       </div>
       <main className={styles.dashboard}>
@@ -123,7 +144,7 @@ export default function Dashboard() {
         </div>
         <div className={styles.titleBox}>
           <h2 className={styles.folderTitle}>{title}</h2>
-          {title !== '전체' ? (
+          {title !== '전체' && (
             <div className={styles.tools}>
               <h3 onClick={() => openModal('folder-share')}>
                 <Image src='/icons/folder-share.svg' width={18} height={18} alt='공유아이콘' />
@@ -138,8 +159,6 @@ export default function Dashboard() {
                 삭제
               </h3>
             </div>
-          ) : (
-            ''
           )}
         </div>
         <div className={styles.cardBox}>
@@ -155,7 +174,11 @@ export default function Dashboard() {
           {title === '전체' && filteredData?.length === 0 && <div className={styles.empty}>저장된 링크가 없습니다</div>}
         </div>
       </main>
-
+      {!isAddBarVisible && !isBottom && (
+        <div className={`${styles.addBox} ${styles.fixed}`}>
+          <AddBar />
+        </div>
+      )}
       <Modal name='folder-share' title='폴더 공유'>
         <ModalShareFolder selectedFolderId={selectedFolderId} closeModal={closeModal} title={title} />
       </Modal>
