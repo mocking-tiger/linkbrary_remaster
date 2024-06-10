@@ -10,7 +10,6 @@ import { useModal } from '../../../hooks/useModal/useModal';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
-import Image from 'next/image';
 import Card from '../../../components/card';
 import ModalEditFolder from '../../../components/modal/edit-folder';
 import ModalShareFolder from '../../../components/modal/share-folder';
@@ -18,6 +17,7 @@ import ModalDeleteFolder from '../../../components/modal/delete-folder';
 import ModalAddFolder from '../../../components/modal/add-folder';
 import checkAddBarVisibility from '../../../utils/addbar-checker';
 import FolderBox from '../../../components/folder-box';
+import TitleBox from '../../../components/title-box';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -121,25 +121,7 @@ export default function Dashboard() {
           }}
         />
         <FolderBox title={title} handleSelectedFolder={handleSelectedFolder} folders={folders} openModal={openModal} />
-        <div className={styles.titleBox}>
-          <h2 className={styles.folderTitle}>{title}</h2>
-          {title !== '전체' && (
-            <div className={styles.tools}>
-              <h3 onClick={() => openModal('folder-share')}>
-                <Image src='/icons/folder-share.svg' width={18} height={18} alt='공유아이콘' />
-                공유
-              </h3>
-              <h3 onClick={() => openModal('folder-edit')}>
-                <Image src='/icons/folder-edit.svg' width={18} height={18} alt='공유아이콘' />
-                이름 변경
-              </h3>
-              <h3 onClick={() => openModal('folder-delete')}>
-                <Image src='/icons/folder-delete.svg' width={18} height={18} alt='공유아이콘' />
-                삭제
-              </h3>
-            </div>
-          )}
-        </div>
+        <TitleBox title={title} openModal={openModal} />
         <div className={styles.cardBox}>
           {filteredData && title === '전체'
             ? filteredData.map((link) => <Card link={link} key={link.id} />)

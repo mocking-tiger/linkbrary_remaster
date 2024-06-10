@@ -45,36 +45,6 @@
       outline: none;
     }
 
-    .titleBox {
-      margin: 24px 0;
-      display: flex;
-      justify-content: space-between;
-
-      .folderTitle {
-        color: var(--black);
-        font-size: 2.4rem;
-        font-weight: 600;
-      }
-
-      .tools {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-
-        & > h3 {
-          & > img {
-            margin-right: 4px;
-          }
-
-          display: flex;
-          align-items: center;
-          color: var(--gray60);
-          font-size: 1.4rem;
-          cursor: pointer;
-        }
-      }
-    }
-
     .cardBox {
       margin-bottom: 100px;
       display: flex;
@@ -132,14 +102,6 @@
 
       .searchBar {
         margin-bottom: 32px;
-      }
-
-      .titleBox {
-        flex-direction: column;
-        gap: 12px;
-        .folderTitle {
-          font-size: 2rem;
-        }
       }
 
       .cardBox {
