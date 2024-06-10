@@ -17,6 +17,7 @@ import ModalShareFolder from '../../../components/modal/share-folder';
 import ModalDeleteFolder from '../../../components/modal/delete-folder';
 import ModalAddFolder from '../../../components/modal/add-folder';
 import checkAddBarVisibility from '../../../utils/addbar-checker';
+import FolderBox from '../../../components/folder-box';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -119,37 +120,7 @@ export default function Dashboard() {
             handleFilteredData(e.target.value);
           }}
         />
-        <div className={styles.folderBox}>
-          <div
-            className={`${styles.folder} ${title === '전체' ? styles.selected : ''}`}
-            onClick={(e) => handleSelectedFolder(e)}
-          >
-            전체
-          </div>
-          {folders &&
-            folders
-              .slice()
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .map((folder) => (
-                <div
-                  className={`${styles.folder} ${title === folder.name ? styles.selected : ''}`}
-                  onClick={(e) => handleSelectedFolder(e, folder.id)}
-                  key={folder.id}
-                >
-                  {folder.name}
-                </div>
-              ))}
-          <Image
-            src='/icons/folder-add.svg'
-            width={16}
-            height={16}
-            alt='폴더추가아이콘'
-            onClick={() => openModal('folder-add')}
-          />
-          <div className={styles.floatingActionButton} onClick={() => openModal('folder-add')}>
-            폴더 추가 +
-          </div>
-        </div>
+        <FolderBox title={title} handleSelectedFolder={handleSelectedFolder} folders={folders} openModal={openModal} />
         <div className={styles.titleBox}>
           <h2 className={styles.folderTitle}>{title}</h2>
           {title !== '전체' && (
