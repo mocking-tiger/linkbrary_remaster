@@ -22,7 +22,7 @@ import CardBox from '../../../components/card-box';
 export default function Dashboard() {
   const router = useRouter();
   const addBarRef = useRef(null);
-  const searchParams = useSearchParams();
+  const searchParams = typeof window !== 'undefined' ? useSearchParams() : null;
   const { Modal, openModal, closeModal } = useModal();
   const [isAddBarVisible, setIsAddBarVisible] = useState(true);
   const [isBottom, setIsBottom] = useState(false);
@@ -92,6 +92,7 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
+    if (!searchParams) return;
     const folderName = searchParams.get('folder');
     if (folders && folderName) {
       const selectedFolder = folders.find((folder) => folder.name === folderName);
