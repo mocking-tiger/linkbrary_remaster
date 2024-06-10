@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { getFolders } from '../../../api/folderApi';
 import { FolderType } from '../../../types/common-types';
@@ -20,6 +20,7 @@ import ModalAddFolder from '../../../components/modal/add-folder';
 export default function Dashboard() {
   const router = useRouter();
   const addBarRef = useRef(null);
+  const searchParams = useSearchParams();
   const { Modal, openModal, closeModal } = useModal();
   const [isAddBarVisible, setIsAddBarVisible] = useState(true);
   const [isBottom, setIsBottom] = useState(false);
@@ -45,6 +46,7 @@ export default function Dashboard() {
     if (target && target.innerText) {
       setTitle(target.innerText);
       setSelectedFolderId(folderId);
+      router.push(`/dashboard?folder=${encodeURIComponent(target.innerText)}`);
     }
   };
 
@@ -92,6 +94,17 @@ export default function Dashboard() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const folderName = searchParams.get('folder');
+    if (folders && folderName) {
+      const selectedFolder = folders.find((folder) => folder.name === folderName);
+      if (selectedFolder) {
+        setTitle(selectedFolder.name);
+        setSelectedFolderId(selectedFolder.id);
+      }
+    }
+  }, [folders, searchParams]);
 
   if (isLoading) {
     return <LoadingScreen />;
