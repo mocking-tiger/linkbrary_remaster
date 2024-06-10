@@ -16,6 +16,7 @@ import ModalEditFolder from '../../../components/modal/edit-folder';
 import ModalShareFolder from '../../../components/modal/share-folder';
 import ModalDeleteFolder from '../../../components/modal/delete-folder';
 import ModalAddFolder from '../../../components/modal/add-folder';
+import checkAddBarVisibility from '../../../utils/addbar-checker';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -66,12 +67,6 @@ export default function Dashboard() {
     }
   };
 
-  const checkAddBarVisibility = (addBar: HTMLDivElement) => {
-    const rect = addBar.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    return rect.bottom >= 0 && rect.top <= windowHeight;
-  };
-  //cp
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
       router.push('/');
