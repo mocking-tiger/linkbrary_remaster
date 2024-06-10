@@ -10,7 +10,6 @@ import { useModal } from '../../../hooks/useModal/useModal';
 import AddBar from '../../../components/add-bar';
 import styles from './page.module.css';
 import LoadingScreen from '../../../components/loading-screen';
-import Card from '../../../components/card';
 import ModalEditFolder from '../../../components/modal/edit-folder';
 import ModalShareFolder from '../../../components/modal/share-folder';
 import ModalDeleteFolder from '../../../components/modal/delete-folder';
@@ -18,6 +17,7 @@ import ModalAddFolder from '../../../components/modal/add-folder';
 import checkAddBarVisibility from '../../../utils/addbar-checker';
 import FolderBox from '../../../components/folder-box';
 import TitleBox from '../../../components/title-box';
+import CardBox from '../../../components/card-box';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -122,18 +122,7 @@ export default function Dashboard() {
         />
         <FolderBox title={title} handleSelectedFolder={handleSelectedFolder} folders={folders} openModal={openModal} />
         <TitleBox title={title} openModal={openModal} />
-        <div className={styles.cardBox}>
-          {filteredData && title === '전체'
-            ? filteredData.map((link) => <Card link={link} key={link.id} />)
-            : filteredData &&
-              filteredData.map((link) => link.folder_id === selectedFolderId && <Card link={link} key={link.id} />)}
-          {filteredData &&
-            title !== '전체' &&
-            filteredData.find((link) => link.folder_id === selectedFolderId) === undefined && (
-              <div className={styles.empty}>저장된 링크가 없습니다</div>
-            )}
-          {title === '전체' && filteredData?.length === 0 && <div className={styles.empty}>저장된 링크가 없습니다</div>}
-        </div>
+        <CardBox filteredData={filteredData} title={title} selectedFolderId={selectedFolderId} />
       </main>
       {!isAddBarVisible && !isBottom && (
         <div className={`${styles.addBox} ${styles.fixed}`}>

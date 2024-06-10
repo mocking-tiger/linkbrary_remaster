@@ -76,11 +76,6 @@
     .dashboard {
       width: 100%;
       padding: 40px 32.5px;
-
-      .cardBox {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
     }
   }
 }
@@ -102,10 +97,6 @@
 
       .searchBar {
         margin-bottom: 32px;
-      }
-
-      .cardBox {
-        grid-template-columns: 1fr;
       }
     }
   }

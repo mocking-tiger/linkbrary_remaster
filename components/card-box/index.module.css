@@ -1,0 +1,30 @@
+.cardBox {
+  margin-bottom: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .empty {
+    width: 100%;
+    margin-bottom: 100px;
+    padding: 41px 0 35px;
+    text-align: center;
+
+    color: var(--black);
+    text-align: center;
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cardBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 430px) {
+  .cardBox {
+    grid-template-columns: 1fr;
+  }
+}
