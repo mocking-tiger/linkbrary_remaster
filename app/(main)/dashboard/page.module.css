@@ -26,6 +26,7 @@
     width: 1060px;
     margin: 0 auto;
     padding-top: 40px;
+    position: relative;
     user-select: none;
 
     .searchBar {
@@ -43,6 +44,13 @@
 
     .searchBar:focus {
       outline: none;
+    }
+
+    .close {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      cursor: pointer;
     }
 
     .cardBox {
@@ -76,6 +84,10 @@
     .dashboard {
       width: 100%;
       padding: 40px 32.5px;
+
+      .close {
+        right: 50px;
+      }
     }
   }
 }
@@ -97,6 +109,11 @@
 
       .searchBar {
         margin-bottom: 32px;
+      }
+
+      .close {
+        top: 30px;
+        right: 35px;
       }
     }
   }

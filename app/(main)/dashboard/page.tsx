@@ -18,6 +18,7 @@ import checkAddBarVisibility from '../../../utils/addbar-checker';
 import FolderBox from '../../../components/folder-box';
 import TitleBox from '../../../components/title-box';
 import CardBox from '../../../components/card-box';
+import Image from 'next/image';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -32,6 +33,7 @@ export default function Dashboard() {
   const [title, setTitle] = useState('전체');
   const [filteredData, setFilteredData] = useState<LinkType[]>();
   const [selectedFolderId, setSelectedFolderId] = useState<number | undefined>(undefined);
+  const [word, setWord] = useState('');
 
   const handleFoldersInfo = async () => {
     setIsLoading(true);
@@ -119,6 +121,19 @@ export default function Dashboard() {
           className={styles.searchBar}
           onChange={(e) => {
             handleFilteredData(e.target.value);
+            setWord(e.target.value);
+          }}
+          value={word}
+        />
+        <Image
+          src='/icons/modal-close.svg'
+          width={24}
+          height={24}
+          alt='검색창 초기화 아이콘'
+          className={styles.close}
+          onClick={() => {
+            setWord('');
+            setFilteredData(links);
           }}
         />
         <FolderBox title={title} handleSelectedFolder={handleSelectedFolder} folders={folders} openModal={openModal} />
