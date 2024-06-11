@@ -45,7 +45,7 @@ export default function SignIn() {
 
   const handleEnterKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
-      WIP();
+      handleSignIn();
     }
   };
 
@@ -58,10 +58,6 @@ export default function SignIn() {
       router.push('/dashboard');
     }
     setIsLoading(false);
-  };
-
-  const WIP = () => {
-    alert('개발중입니다.');
   };
 
   useEffect(() => {
@@ -128,13 +124,13 @@ export default function SignIn() {
           <div className={style.loginButton} onClick={handleSignIn}>
             로그인
           </div>
-          <div className={style.socialLoginBox}>
+          {/* <div className={style.socialLoginBox}>
             <h2>소셜 로그인</h2>
             <div>
               <Image src='/icons/login-google.svg' width={42} height={42} alt='소셜로그인 아이콘-구글' onClick={WIP} />
               <Image src='/icons/login-kakao.svg' width={42} height={42} alt='소셜로그인 아이콘-구글' onClick={WIP} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

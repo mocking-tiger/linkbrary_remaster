@@ -60,7 +60,7 @@ export default function SignUp() {
 
   const handleEnterKey = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
-      WIP();
+      handleSignUp();
     }
   };
 
@@ -72,10 +72,6 @@ export default function SignUp() {
       router.push('/');
     }
     setIsLoading(false);
-  };
-
-  const WIP = () => {
-    alert('개발중입니다.');
   };
 
   useEffect(() => {
@@ -170,13 +166,13 @@ export default function SignUp() {
           >
             회원가입
           </button>
-          <div className={style.socialLoginBox}>
+          {/* <div className={style.socialLoginBox}>
             <h2>다른 방식으로 가입하기</h2>
             <div>
               <Image src='/icons/login-google.svg' width={42} height={42} alt='소셜로그인 아이콘-구글' onClick={WIP} />
               <Image src='/icons/login-kakao.svg' width={42} height={42} alt='소셜로그인 아이콘-구글' onClick={WIP} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
